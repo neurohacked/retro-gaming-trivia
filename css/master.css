@@ -41,6 +41,9 @@ h1 {
 #answers {
     margin: 20px 0;
 }
+#gif {
+    margin: 30px auto;
+}
 @media screen and (min-width: 768px) {
     .jumbotron h1 {
         font-size: 54px;

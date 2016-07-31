@@ -14,7 +14,7 @@ $(document).ready(function() {
     }
     // Create the questions for the game
     function createQuestions() {
-        mario = new quiz('mario+yoshi', 'Who is Mario\'s dinosaur friend?', 'Rex', 'Rawr', 'Toshi', 'Yoshi');
+        mario = new quiz('mario-yoshi', 'Who is Mario\'s dinosaur friend?', 'Rex', 'Rawr', 'Toshi', 'Yoshi');
         sonic = new quiz("sonic+the+hedgehog", "What does Sonic the Hedgehog love to collect?", 'Jewels', 'Coins', 'Chili Dogs', 'Rings');
         link = new quiz('What is the name of Link\'s fairy companion?', 'Cortana', 'Alexa', 'Siri', 'Navi');
     }
@@ -58,6 +58,7 @@ $(document).ready(function() {
 
     //Shuffle answers
     // Display answers to selected question in a random order.
+        for (var i=0; i<)
 
     // Display answer
     // Show a page displaying the correct answer with a related gif
@@ -65,19 +66,19 @@ $(document).ready(function() {
         if (numWrong > numRight) {
             $('#game-display').hide();
             $('#choice').html("Sorry, that's incorrect!");
-            $.ajax({
-                    url: sonic.gif,
-                    method: 'GET'
-                })
-                .done(function(response) {
-                    $('#gif').attr('src', response.data[0].images.fixed_height.url);
-                });
             $('#answer').show();
         } else if (numRight > numWrong) {
             $('#game-display').hide();
             $('#choice').html("That's right!");
             $('#answer').show();
         }
+        $.ajax({
+                url: mario.gif,
+                method: 'GET'
+            })
+            .done(function(response) {
+                $('#gif').attr('src', response.data[0].images.fixed_height.url);
+            });
     }
 
     // Display results
@@ -117,13 +118,11 @@ $(document).ready(function() {
         if (this.value === 'wrong') {
             // Add to numWrong
             numWrong++;
-
             // Testing console
             console.log('Wrong: ' + numWrong);
         } else {
             // Add to numRight
             numRight++;
-
             // Testing console
             console.log('Right: ' + numRight);
         }
