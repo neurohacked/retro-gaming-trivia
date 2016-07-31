@@ -1,9 +1,9 @@
 $(document).ready(function() {
     var time = 30;
     var counter;
-    var numRight = '';
-    var numWrong = '';
-    var unanswered = '';
+    var numRight = 0;
+    var numWrong = 0;
+    var numUnanswered = 0;
     // Constructor for questions
     function question(question, wrong1, wrong2, wrong3, right) {
         this.question = question;
@@ -22,34 +22,54 @@ $(document).ready(function() {
     function timer() {
         counter = setInterval(decrement, 1000);
     }
+
     function decrement() {
         time--;
-        $('#countdown').html('Time Remaining: ' + time + ' seconds.');
+        $('#countdown').html('Time Remaining: ' + time + ' seconds');
 
         if (time === 0) {
-            stop();
+            numUnanswered++;
+            console.log('Unanswered: ' + numUnanswered);
+            reset();
         }
     }
-    function stop() {
-        clearInterval(counter);
+
+    function reset() {
+        time = 30;
     }
     // Shuffle and display questions with answers
     function shuffleQuestion() {
-        $('#question').append(question1.question);
+        $('#question-text').append(question1.question);
+        $('#wrong-1').append(question1.wrong1);
+        $('#wrong-2').append(question1.wrong2);
+        $('#wrong-3').append(question1.wrong3);
+        $('#correct').append(question1.right);
     }
+    // Hide game until Start is clicked
+    $('#start-game').on('click', function() {
+        $('#game-display').show();
+        $('#start').hide();
+        timer();
+    });
+    // Check for wrong or correct answer
+    $('.answer').on('click', function() {
+        if (this.value === 'wrong') {
+            alert('Sorry, that\'s wrong ');
+            numWrong++;
+            console.log('Wrong: ' + numWrong);
+        } else {
+            alert('Correct!');
+            numRight++;
+            console.log('Right: ' + numRight);
 
-
-    // function check {
-    //     $
-    //     if
-    // }
+        }
+    });
     // Initialize the game
     function initialize() {
-
-        timer();
+        $('#game-display').hide();
         createQuestions();
         shuffleQuestion();
-        console.log(question1.question);
+        console.log(question1);
         console.log(question2);
     }
 

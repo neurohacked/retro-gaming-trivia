@@ -18,29 +18,29 @@
                 <div class="jumbotron">
                     <div class="row">
                         <h1>Retro Gaming Trivia</h1>
-
+                    </div>
+                    <div id="start">
+                        <button id="start-game" class="btn btn-lg btn-success btn-block">Start</button>
                     </div>
                     <div id="game-display">
                         <div id="timer" class="row">
                             <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
-                                <h2 id="countdown"></h2>
+                                <h2 id="countdown">Time Remaining: 30 seconds</h2>
                             </div>
                         </div>
-                        <div class="row">
+                        <div id="question" class="row">
                             <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
-                                <h3 id="question"></h3>
+                                <h3 id="question-text"></h3>
                             </div>
                         </div>
                         <div id="answers" class="row">
-                            <button class="btn btn-lg btn-default btn-block">Answer 1</button>
-                            <button class="btn btn-lg btn-default btn-block">Answer 2</button>
-                            <button class="btn btn-lg btn-default btn-block">Answer 3</button>
-                            <button class="btn btn-lg btn-default btn-block">Answer 4</button>
+                            <button id="wrong-1" class="btn btn-md btn-default btn-block answer" value="wrong"></button>
+                            <button id="wrong-2" class="btn btn-md btn-default btn-block answer" value="wrong"></button>
+                            <button id="wrong-3" class="btn btn-md btn-default btn-block answer" value="wrong"></button>
+                            <button id="correct" class="btn btn-md btn-default btn-block answer" value="correct"></button>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
