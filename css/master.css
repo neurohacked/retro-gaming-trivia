@@ -30,7 +30,7 @@ h1 {
     width: 80%;
     height: 725px;
 }
-#timer {
+#timer, #result {
     margin: 20px 0;
     text-align: center;
 }
