@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Retro Gaming Trivia</title>
-    </head>
-    <body>
 
-    </body>
+<head>
+    <meta charset="utf-8">
+    <title>Retro Gaming Trivia</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" src="js/jquery-3.1.0.min.js">
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="jumbotron">
+                    <div class="row">
+                        <h1>Retro Gaming Trivia</h1>
+
+                    </div>
+                    <div id="game-display">
+                        <div id="timer" class="row">
+                            <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
+                                <h2 id="countdown"></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
+                                <h3 id="question"></h3>
+                            </div>
+                        </div>
+                        <div id="answers" class="row">
+                            <button class="btn btn-lg btn-default btn-block">Answer 1</button>
+                            <button class="btn btn-lg btn-default btn-block">Answer 2</button>
+                            <button class="btn btn-lg btn-default btn-block">Answer 3</button>
+                            <button class="btn btn-lg btn-default btn-block">Answer 4</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/script.js"></script>
+</body>
+
 </html>
