@@ -1,11 +1,6 @@
 $(document).ready(function() {
-    var time = 30;
-    var counter;
-    var numRight = 0;
-    var numWrong = 0;
-    var numUnanswered = 0;
-    // Constructor for questions
-    function question(question, wrong1, wrong2, wrong3, right) {
+    // Constructor for questions/answers
+    function quiz(question, wrong1, wrong2, wrong3, right) {
         this.question = question;
         this.wrong1 = wrong1;
         this.wrong2 = wrong2;
@@ -15,8 +10,9 @@ $(document).ready(function() {
     }
     // Create the questions for the game
     function createQuestions() {
-        question1 = new question('Who is Mario\'s dinosaur friend?', 'Rex', 'Rawr', 'Toshi', 'Yoshi');
-        question2 = new question('What does Sonic love to collect?', 'Chili Dogs', 'Coins', 'Jewels', 'Rings');
+        mario = new quiz('Who is Mario\'s dinosaur friend?', 'Rex', 'Rawr', 'Toshi', 'Yoshi');
+        sonic = new quiz('What does Sonic the Hedgehog love to collect?', 'Jewels', 'Coins', 'Chili Dogs', 'Rings');
+        link = new quiz('What is the name of Link\'s fairy companion?', 'Cortana', 'Alexa', 'Siri', 'Navi');
     }
     // Countdown timer
     function timer() {
@@ -30,20 +26,21 @@ $(document).ready(function() {
         if (time === 0) {
             numUnanswered++;
             console.log('Unanswered: ' + numUnanswered);
-            reset();
+            resetTimer();
         }
     }
 
-    function reset() {
+    function resetTimer() {
         time = 30;
     }
     // Shuffle and display questions with answers
     function shuffleQuestion() {
-        $('#question-text').append(question1.question);
-        $('#wrong-1').append(question1.wrong1);
-        $('#wrong-2').append(question1.wrong2);
-        $('#wrong-3').append(question1.wrong3);
-        $('#correct').append(question1.right);
+        // for (var i=0; i<)
+        $('#question-text').append(mario.question);
+        $('#wrong-1').append(mario.wrong1);
+        $('#wrong-2').append(mario.wrong2);
+        $('#wrong-3').append(mario.wrong3);
+        $('#correct').append(mario.right);
     }
     // Hide game until Start is clicked
     $('#start-game').on('click', function() {
@@ -64,13 +61,24 @@ $(document).ready(function() {
 
         }
     });
+    // Display answer
+
+
     // Initialize the game
     function initialize() {
+        time = 30;
+        counter = '';
+        numRight = 0;
+        numWrong = 0;
+        numUnanswered = 0;
+
         $('#game-display').hide();
         createQuestions();
         shuffleQuestion();
-        console.log(question1);
-        console.log(question2);
+        console.log(mario);
+        console.log(sonic);
+        console.log(link);
+        console.log();
     }
 
     initialize();

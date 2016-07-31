@@ -6,7 +6,11 @@ html, body {
     height: 100%;
 }
 body {
-    background-color: #222;
+    background: url(../img/back.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 h1 {
     text-align: center;
