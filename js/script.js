@@ -24,18 +24,8 @@ $(document).ready(function() {
         right: 3
     };
     var sonic = new Quiz("sonic-running", options);
-    // Check for correct answer ----------------------------------------------
-    Quiz.prototype.checkAnswer = function(submittedAnswer) {
-	if (this.correctAnswer === submittedAnswer) {
-		console.log('Correct!');
-		return true;
-	} else {
-		console.log('Wrong!');
-		return false;
-	}
-}
     // Countdown timer for each question -------------------------------------
-    function timer() {
+    function questionTimer() {
         counter = setInterval(decrement, 1000);
     }
 
@@ -66,40 +56,19 @@ $(document).ready(function() {
     function shuffleQuestion() {
         // Display a random qustion with its available answers
         $('#question-text').html(mario.question);
-        $('#wrong-1').html(mario.answers[0]);
-        $('#wrong-2').html(mario.answers[1]);
-        $('#wrong-3').html(mario.answers[2]);
-        $('#correct').html(mario.answers[3]);
+        $('#btn-1').html(mario.answers[0]);
+        $('#btn-2').html(mario.answers[3]).attr('id', 'correct');
+        $('#btn-3').html(mario.answers[2]);
+        $('#btn-4').html(mario.answers[1]);
     }
 
     //Shuffle answers
     // Display answers to selected question in a random order.
 
-    // Display answer
-    // Show a page displaying the correct answer with a related gif
-    function displayAnswer() {
-        if (numWrong > numRight) {
-            $('#game-display').hide();
-            $('#choice').html("Sorry, that's incorrect!");
-            $('#answer').show();
-        } else if (numRight > numWrong) {
-            $('#game-display').hide();
-            $('#choice').html("That's right!");
-            $('#answer').show();
-        }
-        $.ajax({
-                url: mario.gif,
-                method: 'GET'
-            })
-            .done(function(response) {
-                $('#gif').attr('src', response.data[0].images.fixed_height.url);
-            });
-    }
-
     // Display results
     // Show a page with the total results wrong, right, and unanswered after all questions.
 
-    // Initialize the game with a start page
+    // Initialize the game with a start page ---------------------------------
     function initialize() {
         questionTime = 30;
         answerTime = 10;
@@ -115,30 +84,43 @@ $(document).ready(function() {
 
         // Testing Console
         console.log(mario);
+        console.log(mario.answers)
         console.log(sonic);
     }
 
     // PROCESSES
     // -----------------------------------------------------------------------
-    // When Start is clicked, display the game and start the timer -----------
+    // When Start is clicked display the game and start the timer ------------
     $('#start-game').on('click', function() {
         $('#game-display').show();
         $('#start').hide();
-        timer();
+        questionTimer();
     });
-    // Check if selected answer is wrong/right and increase numWrong/numRight
+    // Check if selected answer is wrong/right -------------------------------
     $('.answer').on('click', function() {
         if (this.id === 'correct') {
             numRight++;
+            $('#game-display').hide();
+            $('#choice').html("That's right!");
+            $('#answer').show();
             // Testing console
             console.log('Right: ' + numRight);
         } else {
             numWrong++;
+            $('#game-display').hide();
+            $('#choice').html("Sorry, that's incorrect!");
+            $('#answer').show();
             // Testing console
             console.log('Wrong: ' + numWrong);
         }
-        // Display the answer
-        displayAnswer();
+        $.ajax({
+                url: mario.gif,
+                method: 'GET'
+            })
+            .done(function(response) {
+                $('#gif').attr('src', response.data[3].images.fixed_height.url);
+            });
     });
+    // Initialize the game ---------------------------------------------------
     initialize();
 });
