@@ -52,7 +52,6 @@ $(document).ready(function() {
         questionTime = 30;
     }
     // Shuffle and display a question
-
     function shuffleQuestion() {
         // Display a random qustion with its available answers
         $('#question-text').html(mario.question);
@@ -109,18 +108,19 @@ $(document).ready(function() {
             numWrong++;
             $('#game-display').hide();
             $('#choice').html("Sorry, that's incorrect!");
+
             $('#answer').show();
             // Testing console
             console.log('Wrong: ' + numWrong);
         }
         $.ajax({
-                url: mario.gif,
-                method: 'GET'
-            })
-            .done(function(response) {
-                $('#gif').attr('src', response.data[3].images.fixed_height.url);
-            });
+            url: mario.gif,
+            method: 'GET'
+        }).done(function(response) {
+            $('#gif').attr('src', response.data[3].images.fixed_height.url);
+        });
     });
-    // Initialize the game ---------------------------------------------------
+    // INITIALIZE
+    // -----------------------------------------------------------------------
     initialize();
 });
