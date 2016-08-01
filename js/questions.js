@@ -8,16 +8,16 @@ function Quiz(name, options, gif) {
     return this;
 }
 // Create the questions for the game -------------------------------------
-var options = {
+let options = {
     question: 'Who is Mario\'s dinosaur friend?',
     answers: ['Rex', 'Rawr', 'Toshi', 'Yoshi'],
     right: 3
 };
-var mario = new Quiz('mario-yoshi', options);
+let mario = new Quiz('mario-yoshi', options);
 
 options = {
     question: 'What does Sonic the Hedgehog love to collect?',
     answers: ['Jewels', 'Coins', 'Chili Dogs', 'Rings'],
     right: 3
 };
-var sonic = new Quiz("sonic-running", options);
+let sonic = new Quiz("sonic-running", options);

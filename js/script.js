@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // FUNCTIONS
     // -----------------------------------------------------------------------
-    // Countdown timer for each question -------------------------------------
+    // Countdown timer for each question -----------------------------------
     function questionTimer() {
         counter = setInterval(decrement, 1000);
     }
@@ -27,23 +27,45 @@ $(document).ready(function() {
     function resetTimer() {
         questionTime = 30;
     }
-    // Shuffle and display a question
-    function shuffleQuestion() {
+    // Shuffle and display a question --------------------------------------
+    // function shuffleQuestion() {
         // Display a random qustion with its available answers
         $('#question-text').html(mario.question);
         $('#btn-1').html(mario.answers[0]);
         $('#btn-2').html(mario.answers[3]).attr('id', 'correct');
         $('#btn-3').html(mario.answers[2]);
         $('#btn-4').html(mario.answers[1]);
-    }
+    // }
 
-    //Shuffle answers
-    // Display answers to selected question in a random order.
+    //Shuffle answers ------------------------------------------------------
+
+    // Fisher-Yates shuffle
+    function shuffle(array) {
+        let m = array.length,
+            t, i;
+
+        // While there remain elements to shuffle…
+        while (m) {
+
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+
+        return array;
+    }
+    // Shuffle one question's answers for now
+    shuffle(mario.answers);
+
 
     // Display results
     // Show a page with the total results wrong, right, and unanswered after all questions.
 
-    // Initialize the game with a start page ---------------------------------
+    // Initialize the game with a start page -------------------------------
     function initialize() {
         questionTime = 30;
         answerTime = 10;
@@ -55,30 +77,31 @@ $(document).ready(function() {
         $('#game-display').hide();
         $('#result').hide();
 
-        shuffleQuestion();
+        // shuffleQuestion();
 
-        // Testing Console -------------------------------
+        // Testing Console -----------------------------------------
         console.log(mario);
         console.log(mario.answers)
+        console.log('------------------------------------------');
         console.log(sonic);
     }
 
     // PROCESSES
     // -----------------------------------------------------------------------
-    // When Start is clicked display the game and start the timer ------------
+    // When Start is clicked display the game and start the timer ----------
     $('#start-game').on('click', function() {
         $('#game-display').show();
         $('#start').hide();
         questionTimer();
     });
-    // Check if selected answer is wrong/right -------------------------------
+    // Check if selected answer is wrong/right -----------------------------
     $('.answer').on('click', function() {
         if (this.id === 'correct') {
             numRight++;
             $('#game-display').hide();
             $('#choice').html("That's right!");
             $('#answer').show();
-            // Testing console -------------------------------
+            // Testing console -------------------------------------
             console.log('Right: ' + numRight);
         } else {
             numWrong++;
@@ -86,7 +109,7 @@ $(document).ready(function() {
             $('#choice').html("Sorry, that's incorrect. :(");
             $('#correct-answer').html('The correct answer is ' + mario.answers[3]);
             $('#answer').show();
-            // Testing console -------------------------------
+            // Testing console -------------------------------------
             console.log('Wrong: ' + numWrong);
         }
         $.ajax({
