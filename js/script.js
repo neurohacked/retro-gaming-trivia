@@ -77,7 +77,7 @@ $(document).ready(function() {
         numUnanswered = 0;
 
         $('#game-display').hide();
-        $('#answer').hide();
+        $('#result').hide();
 
         shuffleQuestion();
 
@@ -107,8 +107,8 @@ $(document).ready(function() {
         } else {
             numWrong++;
             $('#game-display').hide();
-            $('#choice').html("Sorry, that's incorrect!");
-
+            $('#choice').html("Sorry, that's incorrect. :(");
+            $('#correct-answer').html('The correct answer is ' + mario.answers[3]);
             $('#answer').show();
             // Testing console
             console.log('Wrong: ' + numWrong);
