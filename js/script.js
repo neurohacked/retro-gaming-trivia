@@ -53,15 +53,17 @@ $(document).ready(function() {
     console.log('Active Question: ' + mario.question);
     console.log('------------------------------------------');
 
-    // Shuffle and display a question --------------------------------------
-    // Display a random qustion with its available answers
-        $('#question-text').html(mario.question);
-        for (var i=0; i<availableAnswers.length; i++) {
-            $('<button id="answer-' + i + '" class="btn btn-md btn-default btn-block answer">' + availableAnswers[i] + '</button>').appendTo('#answers');
-            // Testing Console -------------------------------------
-            console.log('Available Answer: ' + availableAnswers[i]);
-        }
-        console.log('------------------------------------------');
+    // Shuffle and display answers --------------------------------------
+    $('#question-text').html(mario.question);
+    for (let i = 0; i < availableAnswers.length; i++) {
+        let j = $('<button>');
+        j.addClass('btn btn-md btn-default btn-block answer');
+        j.text(availableAnswers[i]);
+        $('#answers').append(j);
+        // Testing Console -------------------------------------
+        console.log('Available Answer: ' + availableAnswers[i]);
+    }
+    console.log('------------------------------------------');
 
     // Display results
     // Show a page with the total results wrong, right, and unanswered after all questions.
@@ -75,14 +77,16 @@ $(document).ready(function() {
         numWrong = 0;
         numUnanswered = 0;
 
-        $('#game-display').hide();
-        $('#result').hide();
+        // $('#game-display').hide();
+        // $('#result').hide();
 
         // shuffleQuestion();
-
         // Testing Console -----------------------------------------
         console.log('Correct Answer: ' + mario.correctAnswer);
         console.log('------------------------------------------');
+        console.log(Quiz[1]);
+        console.log(mario.gif);
+        console.log(sonic.gif);
     }
 
     // PROCESSES
@@ -94,8 +98,8 @@ $(document).ready(function() {
         questionTimer();
     });
     // Check if selected answer is wrong/right -----------------------------
-    $('.answer').on('click', function() {
-        if (this.id === 'correct') {
+    $(document).on('click', '.answer', function() {
+        if (this.innerHTML === mario.correctAnswer) {
             numRight++;
             $('#game-display').hide();
             $('#choice').html("That's right!");
@@ -106,12 +110,11 @@ $(document).ready(function() {
             numWrong++;
             $('#game-display').hide();
             $('#choice').html("Sorry, that's incorrect. :(");
-            $('#correct-answer').html('The correct answer is ' + mario.answers[3]);
+            $('#correct-answer').html('The correct answer is ' + mario.correctAnswer);
             $('#answer').show();
             // Testing console -------------------------------------
             console.log('Wrong: ' + numWrong);
         }
-        console.log(this);
         $.ajax({
             url: mario.gif,
             method: 'GET'

@@ -4,7 +4,7 @@ function Quiz(name, options, gif) {
     this.question = options.question;
     this.answers = options.answers; // Array of answers
     this.correctAnswer = options.answers[options.right];
-    this.gif = queryURL = "https://api.giphy.com/v1/gifs/search?q=" + this.name + "&api_key=dc6zaTOxFJmzC";
+    this.gif = "https://api.giphy.com/v1/gifs/search?q=" + this.name + "&api_key=dc6zaTOxFJmzC";
     return this;
 }
 // Create the questions for the game -------------------------------------
