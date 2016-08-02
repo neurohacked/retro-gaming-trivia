@@ -76,9 +76,9 @@ $(document).ready(function() {
 
     // Display correct answer ----------------------------------------------
     function displayAnswer() {
-        $('#correct-answer').html(`The correct answer is: ${mario.correctAnswer}`);
+        $('#correct-answer').html(`The correct answer is: ${questions[0].question1.correctAnswer}`);
         $.ajax({
-            url: mario.gif,
+            url: questions[0].question1.gif,
             method: 'GET'
         }).done(function(response) {
             $('#gif').attr('src', response.data[3].images.fixed_height.url);
@@ -94,9 +94,9 @@ $(document).ready(function() {
 
         // shuffleQuestion();
         // Testing Console -----------------------------------------
-        console.log('Correct Answer: ' + mario.correctAnswer);
+        console.log('Correct Answer: ' + questions[0].question1.correctAnswer);
         console.log('------------------------------------------');
-        console.log(mario);
+        console.log(questions[0].question1);
     }
 
     // PROCESSES
@@ -122,12 +122,12 @@ $(document).ready(function() {
     // console.log('Active Question: ' + );
     // console.log('------------------------------------------');
     // Shuffle one question's answers for now
-    let availableAnswers = shuffleAnswers(mario.answers);
-    console.log('Active Question: ' + mario.question);
+    let availableAnswers = shuffleAnswers(questions[0].question1.answers);
+    console.log('Active Question: ' + questions[0].question1.question);
     console.log('------------------------------------------');
 
     // Display answers as buttons ------------------------------------------
-    $('#question-text').html(mario.question);
+    $('#question-text').html(questions[0].question1.question);
     for (let i = 0; i < availableAnswers.length; i++) {
         let j = $('<button>');
         j.addClass('btn btn-md btn-default btn-block answer');
@@ -140,7 +140,7 @@ $(document).ready(function() {
 
     // Check if selected answer is wrong/right -----------------------------
     $(document).on('click', '.answer', function() {
-        if (this.innerHTML === mario.correctAnswer) {
+        if (this.innerHTML === questions[0].question1.correctAnswer) {
             numRight++;
             $('#game-display').hide();
             $('#choice').html("That's right!");
