@@ -77,8 +77,8 @@ $(document).ready(function() {
         numWrong = 0;
         numUnanswered = 0;
 
-        // $('#game-display').hide();
-        // $('#result').hide();
+        $('#game-display').hide();
+        $('#result').hide();
 
         // shuffleQuestion();
         // Testing Console -----------------------------------------
