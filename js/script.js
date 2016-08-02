@@ -9,16 +9,16 @@ $(document).ready(function() {
 
     function decrement() {
         questionTime--;
-        $('#countdown').html('Time Remaining: ' + questionTime + ' seconds');
+        $('#countdown').html(`Time Remaining: ${questionTime} seconds`);
 
         if (questionTime === 0) {
             numUnanswered++;
 
-            // $('#game-display').hide();
-            // $('#choice').html("You took to long to answer.");
-            // $('#answer').show();
-
-            resetTimer();
+            stopTimer();
+            $('#game-display').hide();
+            $('#choice').html("You took to long to answer. :/");
+            $('#answer').show();
+            displayAnswer();
 
             // Testing console -------------------------------
             console.log('Unanswered: ' + numUnanswered);
@@ -74,6 +74,17 @@ $(document).ready(function() {
         return array;
     }
 
+    // Display correct answer ----------------------------------------------
+    function displayAnswer() {
+        $('#correct-answer').html(`The correct answer is: ${mario.correctAnswer}`);
+        $.ajax({
+            url: mario.gif,
+            method: 'GET'
+        }).done(function(response) {
+            $('#gif').attr('src', response.data[3].images.fixed_height.url);
+        });
+    }
+
     // Initialize the game with a start page -------------------------------
     function initialize() {
 
@@ -100,6 +111,7 @@ $(document).ready(function() {
         numWrong = 0;
         numUnanswered = 0;
 
+        $('#countdown').html('Time Remaining: 30 seconds')
         $('#game-display').show();
         $('#start').hide();
         $('#results').hide();
@@ -139,28 +151,20 @@ $(document).ready(function() {
             numWrong++;
             $('#game-display').hide();
             $('#choice').html("Sorry, that's incorrect. :(");
-            $('#correct-answer').html("The correct answer is: " + mario.correctAnswer);
             $('#answer').show();
             // Testing console -------------------------------------
             console.log('Wrong: ' + numWrong);
         }
         stopTimer();
-        $.ajax({
-            url: mario.gif,
-            method: 'GET'
-        }).done(function(response) {
-            $('#gif').attr('src', response.data[3].images.fixed_height.url);
-        });
+        displayAnswer();
     });
 
-    // Display results ----
+    // Display results -----------------------------------------------------
     $(document).on('click', '#to-results', function() {
             $('#answer').hide();
             $('#results').show();
             $('#outro').html("All done, here's how you did!");
             $('#end-results').html(`Correct Answers: ${numRight}<br />Incorrect Answers: ${numWrong}<br />Unanswered: ${numUnanswered}`);
-
-            // Testing console -------------------------------------
     });
 
     // INITIALIZE
