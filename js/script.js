@@ -32,30 +32,8 @@ $(document).ready(function() {
         clearInterval(counter);
     }
 
-    // Function to shuffle and choose a question ---------------------------
-    function shuffleQuestions(array) {
-        let m = array.length,
-            t, i;
-
-        // While there remain elements to shuffle…
-        while (m) {
-
-            // Pick a remaining element…
-            i = Math.floor(Math.random() * m--);
-
-            // And swap it with the current element.
-            t = array[m];
-            array[m] = array[i];
-            array[i] = t;
-        }
-
-        return array;
-    }
-
-    // Function to shuffle answers -----------------------------------------
-
     // Fisher-Yates shuffle
-    function shuffleAnswers(array) {
+    function shuffle(array) {
         let m = array.length,
             t, i;
 
@@ -76,9 +54,9 @@ $(document).ready(function() {
 
     // Display correct answer ----------------------------------------------
     function displayAnswer() {
-        $('#correct-answer').html(`The correct answer is: ${questions[0].question1.correctAnswer}`);
+        $('#correct-answer').html(`The correct answer is: ${questions[0].question.correctAnswer}`);
         $.ajax({
-            url: questions[0].question1.gif,
+            url: questions[0].question.gif,
             method: 'GET'
         }).done(function(response) {
             $('#gif').attr('src', response.data[3].images.fixed_height.url);
@@ -87,16 +65,9 @@ $(document).ready(function() {
 
     // Initialize the game with a start page -------------------------------
     function initialize() {
-
         $('#game-display').hide();
         $('#answer').hide();
         $('#results').hide();
-
-        // shuffleQuestion();
-        // Testing Console -----------------------------------------
-        console.log('Correct Answer: ' + questions[0].question1.correctAnswer);
-        console.log('------------------------------------------');
-        console.log(questions[0].question1);
     }
 
     // PROCESSES
@@ -110,6 +81,28 @@ $(document).ready(function() {
         numRight = 0;
         numWrong = 0;
         numUnanswered = 0;
+        $('.answer').remove();
+
+        // Shuffle and choose a question
+        let chosenQuestion = shuffle(questions);
+        // Shuffle chosen question's answers
+        let availableAnswers = shuffle(chosenQuestion[0].question.answers);
+        console.log(`Chosen Question: ${chosenQuestion[0].question.text}`);
+        console.log('------------------------------------------');
+
+        // Display answers as buttons ------------------------------------------
+        $('#question-text').html(questions[0].question.text);
+        for (let i = 0; i < availableAnswers.length; i++) {
+            j = $('<button>');
+            j.addClass('btn btn-md btn-default btn-block answer');
+            j.text(availableAnswers[i]);
+            $('#answers').append(j);
+            // Testing Console -------------------------------------
+            console.log('Available Answer: ' + availableAnswers[i]);
+        }
+        console.log('------------------------------------------');
+        console.log('Correct Answer: ' + questions[0].question.correctAnswer);
+        console.log('------------------------------------------');
 
         $('#countdown').html('Time Remaining: 30 seconds')
         $('#game-display').show();
@@ -117,30 +110,10 @@ $(document).ready(function() {
         $('#results').hide();
         questionTimer();
     });
-    // Shuffle and choose a question
-    // let chosenQuestion = shuffleQuestions(mario.answers);
-    // console.log('Active Question: ' + );
-    // console.log('------------------------------------------');
-    // Shuffle one question's answers for now
-    let availableAnswers = shuffleAnswers(questions[0].question1.answers);
-    console.log('Active Question: ' + questions[0].question1.question);
-    console.log('------------------------------------------');
-
-    // Display answers as buttons ------------------------------------------
-    $('#question-text').html(questions[0].question1.question);
-    for (let i = 0; i < availableAnswers.length; i++) {
-        let j = $('<button>');
-        j.addClass('btn btn-md btn-default btn-block answer');
-        j.text(availableAnswers[i]);
-        $('#answers').append(j);
-        // Testing Console -------------------------------------
-        console.log('Available Answer: ' + availableAnswers[i]);
-    }
-    console.log('------------------------------------------');
 
     // Check if selected answer is wrong/right -----------------------------
     $(document).on('click', '.answer', function() {
-        if (this.innerHTML === questions[0].question1.correctAnswer) {
+        if (this.innerHTML === questions[0].question.correctAnswer) {
             numRight++;
             $('#game-display').hide();
             $('#choice').html("That's right!");
