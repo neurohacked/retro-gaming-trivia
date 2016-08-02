@@ -15,15 +15,24 @@ body {
 h1 {
     text-align: center;
 }
+#main-start {
+    margin: 125px auto;
+}
+#re-start {
+    margin: 40px auto;
+}
+.btn-lg {
+    margin: 0 auto;
+    max-width: 25%;
+}
 .btn-md {
     margin: 20px auto;
     max-width: 90%;
-    height: 50px;
+    height: 60px;
 }
-.btn-lg {
-    margin: 125px auto;
+#to-results {
+    margin: 40px auto;
     max-width: 25%;
-    height: 50px;
 }
 .jumbotron {
     margin: 40px auto;
