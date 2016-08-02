@@ -27,16 +27,6 @@ $(document).ready(function() {
     function resetTimer() {
         questionTime = 30;
     }
-    // Shuffle and display a question --------------------------------------
-    // function shuffleQuestion() {
-        // Display a random qustion with its available answers
-        $('#question-text').html(mario.question);
-        $('#btn-1').html(mario.answers[0]);
-        $('#btn-2').html(mario.answers[3]).attr('id', 'correct');
-        $('#btn-3').html(mario.answers[2]);
-        $('#btn-4').html(mario.answers[1]);
-    // }
-
     //Shuffle answers ------------------------------------------------------
 
     // Fisher-Yates shuffle
@@ -59,8 +49,19 @@ $(document).ready(function() {
         return array;
     }
     // Shuffle one question's answers for now
-    shuffle(mario.answers);
+    let availableAnswers = shuffle(mario.answers);
+    console.log('Active Question: ' + mario.question);
+    console.log('------------------------------------------');
 
+    // Shuffle and display a question --------------------------------------
+    // Display a random qustion with its available answers
+        $('#question-text').html(mario.question);
+        for (var i=0; i<availableAnswers.length; i++) {
+            $('<button id="answer-' + i + '" class="btn btn-md btn-default btn-block answer">' + availableAnswers[i] + '</button>').appendTo('#answers');
+            // Testing Console -------------------------------------
+            console.log('Available Answer: ' + availableAnswers[i]);
+        }
+        console.log('------------------------------------------');
 
     // Display results
     // Show a page with the total results wrong, right, and unanswered after all questions.
@@ -80,10 +81,8 @@ $(document).ready(function() {
         // shuffleQuestion();
 
         // Testing Console -----------------------------------------
-        console.log(mario);
-        console.log(mario.answers)
+        console.log('Correct Answer: ' + mario.correctAnswer);
         console.log('------------------------------------------');
-        console.log(sonic);
     }
 
     // PROCESSES
@@ -112,6 +111,7 @@ $(document).ready(function() {
             // Testing console -------------------------------------
             console.log('Wrong: ' + numWrong);
         }
+        console.log(this);
         $.ajax({
             url: mario.gif,
             method: 'GET'
