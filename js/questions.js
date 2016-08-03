@@ -44,7 +44,7 @@ let questions = [
 		{text: 'Who says "@!#?@!" every time he is hit by something?',
         gif: "https://api.giphy.com/v1/gifs/search?q=qbert&api_key=dc6zaTOxFJmzC",
         answers: ['Donkey Kong', 'Wimpy', 'Bagman', 'Q*bert'],
-		correctAnswer: 'Navi'
+		correctAnswer: 'Q*bert'
 		},
     }
 ]
