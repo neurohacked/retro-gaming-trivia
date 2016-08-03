@@ -20,7 +20,7 @@ let questions = [{
     },
 }, {
     question: {
-        text: 'Which is these is NOT a Pac-Man ghost.',
+        text: 'Which of these is NOT a Pac-Man ghost?',
         gif: "https://api.giphy.com/v1/gifs/search?q=pacman-ghosts&api_key=dc6zaTOxFJmzC",
         answers: ['Inky', 'Clyde', 'Blinky', 'Bonnie'],
         correctAnswer: 'Bonnie'
