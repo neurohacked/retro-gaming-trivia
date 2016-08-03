@@ -32,18 +32,17 @@ $(document).ready(function() {
             // Testing console -------------------------------
             console.log('Unanswered: ' + numUnanswered);
         } else if (answerTime === 0) {
-            console.log('Time Up');
             stopTimer();
             nextQuestion();
         }
     }
 
     function resetQuestionTimer() {
-        questionTime = 30;
+        questionTime = 10;
     }
 
     function resetAnswerTimer() {
-        answerTime = 10;
+        answerTime = 1;
     }
 
     function stopTimer() {
@@ -188,8 +187,6 @@ $(document).ready(function() {
             });
         }
         answerTimer();
-        console.log(availableQuestions[0].question.gif);
-        console.log(availableQuestions[0].question.correctAnswer);
     }
 
     // Initialize the game with a start page ----------------------------
@@ -204,8 +201,8 @@ $(document).ready(function() {
 
     // When Start is clicked display the game and start the timer -------
     $(document).on('click', '.start-game', function() {
-        questionTime = 30;
-        answerTime = 10;
+        questionTime = 10;
+        answerTime = 1;
         counter = '';
         onQuestion = false;
         numRight = 0;
@@ -222,6 +219,7 @@ $(document).ready(function() {
         }
 
         $('#start').hide();
+        $('#results').hide();
         nextQuestion();
     });
 
@@ -255,8 +253,9 @@ $(document).ready(function() {
     // Display results --------------------------------------------------
     // $(document).on('click', '#to-results', function() {
     function displayResults() {
+        stopTimer();
         $('#game-display').hide();
-        // $('#answer').hide();
+        $('#answer').hide();
         $('#results').show();
         $('#outro').html("All done, here's how you did!");
         $('#end-results').html(`Correct Answers: ${numRight}<br />Incorrect Answers: ${numWrong}<br />Unanswered: ${numUnanswered}`);
