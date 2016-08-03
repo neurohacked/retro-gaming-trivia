@@ -7,16 +7,44 @@ function Quiz(questions) {
 let questions = [
 	{question:
 		{text: 'Who is Mario\'s dinosaur friend?',
-        gif: "https://api.giphy.com/v1/gifs/search?q=mario-yoshi&api_key=dc6zaTOxFJmzC",
-        answers: ['Rex','Rawr','Toshi','Yoshi'],
+        gif: "https://api.giphy.com/v1/gifs/search?q=90s-nintendo-super-mario&api_key=dc6zaTOxFJmzC",
+        answers: ['Rex','Luigi','Toshi','Yoshi'],
 		correctAnswer: 'Yoshi'
 		},
     },
     {question:
 		{text: 'What does Sonic the Hedgehog love to collect?',
-        gif: "https://api.giphy.com/v1/gifs/search?q=sonic-running&api_key=dc6zaTOxFJmzC",
-        answers: ['Jewels', 'Coins', 'Chili Dogs', 'Rings'],
+        gif: "https://api.giphy.com/v1/gifs/search?q=sonic-the-hedgehog-boom-gif&api_key=dc6zaTOxFJmzC",
+        answers: ['Jewels', 'Coins', 'Diamonds', 'Rings'],
 		correctAnswer: 'Rings'
+		},
+    },
+    {question:
+		{text: 'Which is these is NOT a Pac-Man ghost.',
+        gif: "https://api.giphy.com/v1/gifs/search?q=pacman-ghosts&api_key=dc6zaTOxFJmzC",
+        answers: ['Inky', 'Clyde', 'Blinky', 'Bonnie'],
+		correctAnswer: 'Bonnie'
+		},
+    },
+    {question:
+		{text: 'Who is Link\'s fairy companion?',
+        gif: "https://api.giphy.com/v1/gifs/search?q=legend-of-zelda-hey&api_key=dc6zaTOxFJmzC",
+        answers: ['Siri', 'Alexa', 'Cortana', 'Navi'],
+		correctAnswer: 'Navi'
+		},
+    },
+    {question:
+		{text: 'Which game franchise, born in 1992, courted controversy with its ‘Fatalities’?',
+        gif: "https://api.giphy.com/v1/gifs/search?q=dance-mash-up-mortal-kombat&api_key=dc6zaTOxFJmzC",
+        answers: ['Art of Fighting', 'Fatal Fury', 'King of Fighters', 'Mortal Kombat'],
+		correctAnswer: 'Mortal Kombat'
+		},
+    },
+    {question:
+		{text: 'Who says "@!#?@!" every time he is hit by something?',
+        gif: "https://api.giphy.com/v1/gifs/search?q=qbert&api_key=dc6zaTOxFJmzC",
+        answers: ['Donkey Kong', 'Wimpy', 'Bagman', 'Q*bert'],
+		correctAnswer: 'Navi'
 		},
     }
 ]

@@ -2,7 +2,7 @@ $(document).ready(function() {
     // FUNCTIONS
     // -----------------------------------------------------------------------
 
-    // Countdown timer for each question -----------------------------------
+    // Countdown timer for questions ------------------------------------
     function questionTimer() {
         counter = setInterval(decrement, 1000);
     }
@@ -52,18 +52,18 @@ $(document).ready(function() {
         return array;
     }
 
-    // Display correct answer ----------------------------------------------
+    // Display correct answer -------------------------------------------
     function displayAnswer() {
         $('#correct-answer').html(`The correct answer is: ${questions[0].question.correctAnswer}`);
         $.ajax({
             url: questions[0].question.gif,
             method: 'GET'
         }).done(function(response) {
-            $('#gif').attr('src', response.data[3].images.fixed_height.url);
+            $('#gif').attr('src', response.data[0].images.fixed_height.url);
         });
     }
 
-    // Initialize the game with a start page -------------------------------
+    // Initialize the game with a start page ----------------------------
     function initialize() {
         $('#game-display').hide();
         $('#answer').hide();
@@ -87,10 +87,17 @@ $(document).ready(function() {
         let chosenQuestion = shuffle(questions);
         // Shuffle chosen question's answers
         let availableAnswers = shuffle(chosenQuestion[0].question.answers);
+        console.log(`Question 1: ${chosenQuestion[0].question.text}`);
+        console.log(`Question 2: ${chosenQuestion[1].question.text}`);
+        console.log(`Question 3: ${chosenQuestion[2].question.text}`);
+        console.log(`Question 4: ${chosenQuestion[3].question.text}`);
+        console.log(`Question 5: ${chosenQuestion[4].question.text}`);
+        console.log(`Question 6: ${chosenQuestion[5].question.text}`);
+        console.log('------------------------------------------');
         console.log(`Chosen Question: ${chosenQuestion[0].question.text}`);
         console.log('------------------------------------------');
 
-        // Display answers as buttons ------------------------------------------
+        // Display answers as buttons ------------------------------
         $('#question-text').html(questions[0].question.text);
         for (let i = 0; i < availableAnswers.length; i++) {
             j = $('<button>');
