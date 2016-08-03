@@ -12,28 +12,25 @@ $(document).ready(function() {
     }
 
     function decrement() {
-        if (onQuestion === true) {
-            questionTime--;
-            $('#countdown').html(`Time Remaining: ${questionTime} seconds`);
-            console.log(questionTime);
-        } else {
-            answerTime--;
-            console.log(`Answer Time: ${answerTime}`);
-        }
-
         if (questionTime === 0) {
+            onQuestion = false;
+            $('.answer').remove();
+            answeredQuestions++;
             numUnanswered++;
-            stopTimer();
-            $('#game-display').hide();
             $('#choice').html("You took to long to answer. :/");
-            $('#answer').show();
+            stopTimer();
+            resetQuestionTimer();
+            answerTimer();
             displayAnswer();
-
-            // Testing console -------------------------------
-            console.log('Unanswered: ' + numUnanswered);
         } else if (answerTime === 0) {
             stopTimer();
             nextQuestion();
+        }
+        if (onQuestion === true) {
+            questionTime--;
+            $('#countdown').html(`Time Remaining: ${questionTime} seconds`);
+        } else {
+            answerTime--;
         }
     }
 
@@ -137,6 +134,8 @@ $(document).ready(function() {
 
     // Display correct answer -------------------------------------------
     function displayAnswer() {
+        $('#game-display').hide();
+        $('#answer').show();
         if (answeredQuestions === 6) {
             $('#correct-answer').html(`The correct answer is: ${availableQuestions[5].question.correctAnswer}`);
             $.ajax({
@@ -186,7 +185,6 @@ $(document).ready(function() {
                 $('#gif').attr('src', response.data[0].images.fixed_height.url);
             });
         }
-        answerTimer();
     }
 
     // Initialize the game with a start page ----------------------------
@@ -230,23 +228,14 @@ $(document).ready(function() {
         answeredQuestions++;
         if (this.innerHTML === answer) {
             numRight++;
-            $('#game-display').hide();
             $('#choice').html("That's right!");
-            $('#answer').show();
-            // Testing console -------------------------------------
-            console.log('Right: ' + numRight);
         } else {
             numWrong++;
-            $('#game-display').hide();
             $('#choice').html("Sorry, that's incorrect. :(");
-            $('#answer').show();
-            // Testing console -------------------------------------
-            console.log('Wrong: ' + numWrong);
         }
         stopTimer();
         resetQuestionTimer();
-        console.log(`Answered Questions: ${answeredQuestions}`);
-        console.log(onQuestion);
+        answerTimer();
         displayAnswer();
     });
 
