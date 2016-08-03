@@ -1,3 +1,18 @@
+@font-face {
+    font-family: "PressStart2P";
+    src: url('../font/PressStart2P.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Arcade-N';
+    src:url('../font/Arcade-N.ttf.woff') format('woff'),
+        url('../font/Arcade-N.ttf.svg#Arcade-N') format('svg'),
+        url('../font/Arcade-N.ttf.eot'),
+        url('../font/Arcade-N.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +28,8 @@ body {
     background-size: cover;
 }
 h1 {
+    font-size: 28px;
+    font-family: Arcade-N, sans-serif;
     text-align: center;
 }
 #main-start {
@@ -51,6 +68,6 @@ h1 {
 }
 @media screen and (min-width: 768px) {
     .jumbotron h1 {
-        font-size: 54px;
+        font-size: 40px;
     }
 }
