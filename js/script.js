@@ -64,6 +64,67 @@ $(document).ready(function() {
         });
     }
 
+    // Switch to next available question --------------------------------
+    function nextQuestion() {
+        if (answeredQuestions === 6) {
+            displayResults();
+        } else if (answeredQuestions === 5) {
+            $('#question-text').html(availableQuestions[5].question.text);
+            answer = availableQuestions[5].question.correctAnswer
+            for (let i = 0; i < availableQuestions[5].question.answers.length; i++) {
+                j = $('<button>');
+                j.addClass('btn btn-md btn-default btn-block answer');
+                j.text(availableQuestions[5].question.answers[i]);
+                $('#answers').append(j);
+            }
+        } else if (answeredQuestions === 4) {
+            $('#question-text').html(availableQuestions[4].question.text);
+            answer = availableQuestions[4].question.correctAnswer
+            for (let i = 0; i < availableQuestions[4].question.answers.length; i++) {
+                j = $('<button>');
+                j.addClass('btn btn-md btn-default btn-block answer');
+                j.text(availableQuestions[4].question.answers[i]);
+                $('#answers').append(j);
+            }
+        } else if (answeredQuestions === 3) {
+            $('#question-text').html(availableQuestions[3].question.text);
+            answer = availableQuestions[3].question.correctAnswer
+            for (let i = 0; i < availableQuestions[3].question.answers.length; i++) {
+                j = $('<button>');
+                j.addClass('btn btn-md btn-default btn-block answer');
+                j.text(availableQuestions[3].question.answers[i]);
+                $('#answers').append(j);
+            }
+        } else if (answeredQuestions === 2) {
+            $('#question-text').html(availableQuestions[2].question.text);
+            answer = availableQuestions[2].question.correctAnswer
+            for (let i = 0; i < availableQuestions[2].question.answers.length; i++) {
+                j = $('<button>');
+                j.addClass('btn btn-md btn-default btn-block answer');
+                j.text(availableQuestions[2].question.answers[i]);
+                $('#answers').append(j);
+            }
+        } else if (answeredQuestions === 1) {
+            $('#question-text').html(availableQuestions[1].question.text);
+            answer = availableQuestions[1].question.correctAnswer
+            for (let i = 0; i < availableQuestions[1].question.answers.length; i++) {
+                j = $('<button>');
+                j.addClass('btn btn-md btn-default btn-block answer');
+                j.text(availableQuestions[1].question.answers[i]);
+                $('#answers').append(j);
+            }
+        } else {
+            $('#question-text').html(availableQuestions[0].question.text);
+            answer = availableQuestions[0].question.correctAnswer;
+            for (let i = 0; i < availableQuestions[0].question.answers.length; i++) {
+                j = $('<button>');
+                j.addClass('btn btn-md btn-default btn-block answer');
+                j.text(availableQuestions[0].question.answers[i]);
+                $('#answers').append(j);
+            }
+        }
+    }
+
     // Initialize the game with a start page ----------------------------
     function initialize() {
         $('#game-display').hide();
@@ -74,7 +135,7 @@ $(document).ready(function() {
     // PROCESSES
     // -----------------------------------------------------------------------
 
-    // When Start is clicked display the game and start the timer ----------
+    // When Start is clicked display the game and start the timer -------
     $(document).on('click', '.start-game', function() {
         questionTime = 30;
         answerTime = 10;
@@ -82,67 +143,60 @@ $(document).ready(function() {
         numRight = 0;
         numWrong = 0;
         numUnanswered = 0;
+        answeredQuestions = 0;
         $('.answer').remove();
 
-        // Shuffle questions
+        // Shuffle questions ---------------------------------------
         availableQuestions = shuffle(questions);
-        // Shuffle question's answers
+        // Shuffle question's answers ------------------------------
         for (let i = 0; i < availableQuestions.length; i++) {
             shuffle(availableQuestions[i].question.answers);
         }
-        console.log(availableQuestions[0].question.text);
-        console.log('------------------------------------------');
-
-        // Display answers as buttons ------------------------------
-        $('#question-text').html(availableQuestions[0].question.text);
-        $()
-        for (let i = 0; i < availableQuestions[0].question.answers.length; i++) {
-            j = $('<button>');
-            j.addClass('btn btn-md btn-default btn-block answer');
-            j.text(availableQuestions[0].question.answers[i]);
-            $('#answers').append(j);
-            // Testing Console -------------------------------------
-            console.log('Available Answers: ' + availableQuestions[0].question.answers[i]);
-        }
-        console.log('------------------------------------------');
-        console.log(`Correct Answer: ${availableQuestions[0].question.correctAnswer}`);
-        console.log('------------------------------------------');
 
         $('#countdown').html('Time Remaining: 30 seconds')
         $('#game-display').show();
         $('#start').hide();
         $('#results').hide();
         questionTimer();
+        nextQuestion();
     });
 
-    // Check if selected answer is wrong/right -----------------------------
+    // Check if selected answer is wrong/right --------------------------
     $(document).on('click', '.answer', function() {
-        if (this.innerHTML === availableQuestions[0].question.correctAnswer) {
+        $('.answer').remove();
+        answeredQuestions++;
+        if (this.innerHTML === answer) {
             numRight++;
-            $('#game-display').hide();
-            $('#choice').html("That's right!");
-            $('#answer').show();
+            // $('#game-display').hide();
+            // $('#choice').html("That's right!");
+            // $('#answer').show();
             // Testing console -------------------------------------
             console.log('Right: ' + numRight);
         } else {
             numWrong++;
-            $('#game-display').hide();
-            $('#choice').html("Sorry, that's incorrect. :(");
-            $('#answer').show();
+            // $('#game-display').hide();
+            // $('#choice').html("Sorry, that's incorrect. :(");
+            // $('#answer').show();
             // Testing console -------------------------------------
             console.log('Wrong: ' + numWrong);
         }
-        stopTimer();
-        displayAnswer();
+        // stopTimer();
+
+        console.log(`Answered Questions: ${answeredQuestions}`);
+        // displayAnswer();
+        nextQuestion();
     });
 
-    // Display results -----------------------------------------------------
-    $(document).on('click', '#to-results', function() {
-        $('#answer').hide();
+    // Display results --------------------------------------------------
+    // $(document).on('click', '#to-results', function() {
+    function displayResults() {
+        $('#game-display').hide();
+        // $('#answer').hide();
         $('#results').show();
         $('#outro').html("All done, here's how you did!");
         $('#end-results').html(`Correct Answers: ${numRight}<br />Incorrect Answers: ${numWrong}<br />Unanswered: ${numUnanswered}`);
-    });
+    }
+    // });
 
     // INITIALIZE
     // -----------------------------------------------------------------------
