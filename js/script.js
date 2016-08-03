@@ -35,11 +35,11 @@ $(document).ready(function() {
     }
 
     function resetQuestionTimer() {
-        questionTime = 10;
+        questionTime = 30;
     }
 
     function resetAnswerTimer() {
-        answerTime = 1;
+        answerTime = 5;
     }
 
     function stopTimer() {
@@ -199,8 +199,8 @@ $(document).ready(function() {
 
     // When Start is clicked display the game and start the timer -------
     $(document).on('click', '.start-game', function() {
-        questionTime = 10;
-        answerTime = 1;
+        questionTime = 30;
+        answerTime = 5;
         counter = '';
         onQuestion = false;
         numRight = 0;
