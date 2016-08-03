@@ -187,6 +187,16 @@ $(document).ready(function() {
         }
     }
 
+    // Display results --------------------------------------------------
+    function displayResults() {
+        stopTimer();
+        $('#game-display').hide();
+        $('#answer').hide();
+        $('#results').show();
+        $('#outro').html("All done, here's how you did!");
+        $('#end-results').html(`Correct Answers: ${numRight}<br />Incorrect Answers: ${numWrong}<br />Unanswered: ${numUnanswered}`);
+    }
+
     // Initialize the game with a start page ----------------------------
     function initialize() {
         $('#game-display').hide();
@@ -238,18 +248,6 @@ $(document).ready(function() {
         answerTimer();
         displayAnswer();
     });
-
-    // Display results --------------------------------------------------
-    // $(document).on('click', '#to-results', function() {
-    function displayResults() {
-        stopTimer();
-        $('#game-display').hide();
-        $('#answer').hide();
-        $('#results').show();
-        $('#outro').html("All done, here's how you did!");
-        $('#end-results').html(`Correct Answers: ${numRight}<br />Incorrect Answers: ${numWrong}<br />Unanswered: ${numUnanswered}`);
-    }
-    // });
 
     // INITIALIZE
     // -----------------------------------------------------------------------
