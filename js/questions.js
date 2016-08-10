@@ -28,7 +28,7 @@ let questions = [{
 }, {
     question: {
         text: 'Who is Link\'s fairy companion?',
-        gif: "https://api.giphy.com/v1/gifs/search?q=legend-of-zelda-hey&api_key=dc6zaTOxFJmzC",
+        gif: "https://api.giphy.com/v1/gifs/search?q=link-kills-navi&api_key=dc6zaTOxFJmzC",
         answers: ['Siri', 'Alexa', 'Cortana', 'Navi'],
         correctAnswer: 'Navi'
     },
