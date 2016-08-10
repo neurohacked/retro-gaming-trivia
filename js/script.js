@@ -226,6 +226,8 @@ $(document).ready(function() {
             shuffle(availableQuestions[i].question.answers);
         }
 
+        console.log(availableQuestions.indexOf());
+
         $('#start').hide();
         $('#results').hide();
         nextQuestion();
